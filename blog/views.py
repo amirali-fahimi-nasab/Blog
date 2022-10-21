@@ -26,9 +26,15 @@ class ListViewsBlog(APIView):
 class CreateViewBlog(APIView):
     serializer_class = BlogSerializers
     def post(self,request):
-        ser_data = BlogSerializers(instance=Blog , data = request.data)
+        ser_data = BlogSerializers( data = request.POST)
         if ser_data.is_valid():
-            return Response(ser_data.data , status=HTTP_201_CREATED)
+            Blog.objects.create(
+                user = ser_data.validated_data['user'],
+                title = ser_data.validated_data['title'],
+                body = ser_data.validated_data['body'],
+                choices_wishlist = ser_data.validated_data['choices_wishlist'],
+            )
+            return Response(data = ser_data.data , status=HTTP_201_CREATED)
 
         return Response(ser_data.errors , status=HTTP_400_BAD_REQUEST)
 
