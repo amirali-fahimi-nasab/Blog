@@ -29,6 +29,7 @@ class Comment(models.Model):
     text = models.TextField()
     data_created = models.DateTimeField(auto_now=True)
     date_modified = models.DateTimeField(auto_now_add=True)
+    comment = models.ForeignKey('self', null = True , blank=True ,on_delete= models.CASCADE, related_name = 'childern' )
 
 
 
