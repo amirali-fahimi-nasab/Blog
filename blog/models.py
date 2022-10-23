@@ -29,11 +29,11 @@ class Comment(models.Model):
     text = models.TextField()
     data_created = models.DateTimeField(auto_now=True)
     date_modified = models.DateTimeField(auto_now_add=True)
-    comment = models.ForeignKey('self', null = True , blank=True ,on_delete= models.CASCADE, related_name = 'childern' )
+    comment_text = models.ForeignKey('self', null = True , blank=True ,on_delete= models.CASCADE, related_name = 'childern' )
 
 
 
     def __str__(self):
-        return f' {self.user} -    user blog is : {self.blog}'
+        return f' {self.user} -    user blog is : {self.text}'
 
 

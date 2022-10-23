@@ -16,6 +16,7 @@ class BlogSerializers(serializers.ModelSerializer):
 
 
 class CommentSerializers(serializers.ModelSerializer):
+    comment = serializers.SlugRelatedField(read_only=True , slug_field='text')
     class Meta:
         model = Comment
         fields ="__all__"
