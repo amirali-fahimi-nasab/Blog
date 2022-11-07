@@ -7,9 +7,12 @@ from rest_framework.status import HTTP_200_OK , HTTP_201_CREATED ,HTTP_400_BAD_R
 from rest_framework.permissions import IsAuthenticated,BasePermission,SAFE_METHODS
 
 
+
 from .models import Blog,Comment
 from .serializers import BlogSerializers,CommentSerializers
 from permissions import IsOwnerOrReadOnly
+
+
 # Create your views here.
 class ReadOnly(BasePermission):
     def has_permission(self, request, view):
@@ -69,8 +72,8 @@ class DeleteViewsBlog(APIView):
 
 class ListCommentViews(APIView):
     def get(self,request):
-        comments = Comment.objects.all()
-        ser_data  = CommentSerializers(instance=comments , many=True)
+        comments = Comment.objects.alll()
+        ser_data = CommentSerializers(instance=comments , many=True)
         return Response(data = ser_data.data)
 
 
@@ -113,3 +116,5 @@ class DeleteCommentViews(APIView):
         if ser_data.is_valid():
             comment.delete()
             return Response({'massage':'Your comment was deleted'})
+
+
